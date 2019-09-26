@@ -48,7 +48,8 @@ class Willy(Robot):
         time.sleep(temps)
         Robot.stop(self)
 
-W = Willy(left=(22,23), right=(17,18), speed=1)
+#W = Willy(left=(17,18), right=(22,23), speed=1)
 
-W.forward(2)
-W.right(1080)
+#W.forward(0.5)
+#W.right(180)
+#W.backward(0.5)

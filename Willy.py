@@ -49,33 +49,37 @@ class Willy(Robot):
         Robot.stop(self)
 
 
-	def stopClick(self):
+    def stopClick(self):
 		
-		Robot.stop(self)
+	Robot.stop(self)
 
 		
-	def forwardClick(self):
+    def forwardClick(self):
 		
-		Robot.forward(self)
+	Robot.forward(self)
 
 		
-	def backwardClick(self):
+    def backwardClick(self):
 		
-		Robot.backward(self)
+        Robot.backward(self)
 		
 	
-	def rightClick(self):
+    def rightClick(self):
 		
-		Robot.right(self)
+	Robot.right(self)
 		
 		
-	def leftClick(self):
+    def leftClick(self):
 		
-		Robot.left(self)
+	Robot.left(self)
 		
 
-#W = Willy(left=(17,18), right=(22,23), speed=1)
+W = Willy(left=(17,18), right=(22,23), speed=1)
 
-#W.forward(0.5)
-#W.right(180)
-#W.backward(0.5)
+#W.forward(2)
+#W.right(90)
+#W.forward(1)
+
+#W.forwardClick()
+#time.sleep(1)
+#W.stop()

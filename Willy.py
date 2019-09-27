@@ -48,6 +48,32 @@ class Willy(Robot):
         time.sleep(temps)
         Robot.stop(self)
 
+
+	def stopClick(self):
+		
+		Robot.stop(self)
+
+		
+	def forwardClick(self):
+		
+		Robot.forward(self)
+
+		
+	def backwardClick(self):
+		
+		Robot.backward(self)
+		
+	
+	def rightClick(self):
+		
+		Robot.right(self)
+		
+		
+	def leftClick(self):
+		
+		Robot.left(self)
+		
+
 #W = Willy(left=(17,18), right=(22,23), speed=1)
 
 #W.forward(0.5)

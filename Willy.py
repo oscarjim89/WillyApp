@@ -74,7 +74,7 @@ class Willy(Robot):
 	Robot.left(self)
 		
 
-W = Willy(left=(17,18), right=(22,23), speed=1)
+#W = Willy(left=(17,18), right=(22,23), speed=1)
 
 #W.forward(2)
 #W.right(90)

@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 path = os.path.dirname(os.path.realpath(__file__))
 
-W = Willy(left=(17,18), right=(22,23), speed=1)
+#W = Willy(left=(17,18), right=(22,23), speed=0.5)
 
 #def get_photos():
 #    photo_files = glob("%s/static/photos/*.jpg" % path)
@@ -16,6 +16,8 @@ W = Willy(left=(17,18), right=(22,23), speed=1)
 
 @app.route('/')
 def index():
+    global W
+    W = Willy(left=(17,18), right=(22,23), speed=0.5)
     return render_template('index.html')
 #    photos = get_photos()
 #    return render_template('index.html', photos=photos)
@@ -23,6 +25,7 @@ def index():
 @app.route('/FW/', methods=['POST'])
 def FW():
     W.forwardClick()
+    #W.forward(0.1)
     return render_template('index.html')
 
 @app.route('/BW/', methods=['POST'])
@@ -58,4 +61,5 @@ def stop():
 #    return render_template('view.html', photo=photo, tweeted=True)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, port=80, host='0.0.0.0')
+

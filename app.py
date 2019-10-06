@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from Willy import *
 from datetime import datetime
 import os
@@ -17,7 +17,7 @@ path = os.path.dirname(os.path.realpath(__file__))
 @app.route('/')
 def index():
     global W
-    W = Willy(left=(17,18), right=(22,23), speed=0.5)
+    W = Willy(left=(17,18), right=(22,23), speed=0.6)
     return render_template('index.html')
 #    photos = get_photos()
 #    return render_template('index.html', photos=photos)
@@ -25,8 +25,8 @@ def index():
 @app.route('/FW/', methods=['POST'])
 def FW():
     W.forwardClick()
-    #W.forward(0.1)
     return render_template('index.html')
+
 
 @app.route('/BW/', methods=['POST'])
 def BW():
@@ -48,6 +48,15 @@ def stop():
     W.stopClick()
     return render_template('index.html')
 
+##ejemplo para AJAX
+#@app.route('/_get_data/', methods=['POST'])
+#def _get_data():
+#
+#    #W = Willy(left=(17,18), right=(22,23), speed=0.5)
+#    W.forward(0.1)
+#    response = "Moving forward..."
+#    return jsonify({'data': response})
+
 #@app.route('/view/<photo>/')
 #def view(photo):
 #    return render_template('view.html', photo=photo)
@@ -62,4 +71,3 @@ def stop():
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, host='0.0.0.0')
-

@@ -1,5 +1,7 @@
 from time import sleep, time
+from datetime import datetime
 from gpiozero import Robot, InputDevice, OutputDevice
+from picamera import PiCamera
 
 class Willy(Robot):
 
@@ -15,6 +17,8 @@ class Willy(Robot):
         Robot.__init__(self, left, right)
         self.__trig = OutputDevice(sonar[0])
         self.__echo = InputDevice(sonar[1])
+        self.__content = "/home/pi/gitProjects/WillyApp/content/"
+        self.__cam = PiCamera()
         print("Hola! Estoy preparado!")
 
     #Mou cap a endavant la distancia en metres especificada
@@ -87,20 +91,40 @@ class Willy(Robot):
         #print(str(round(distance,1)) + "cm")
         return distance
 
+    #Algoritme d'exploració bàsic
+    def Explora(self):
+        while True:
+            try:
+                self.forwardClick()
+                d = self.getSonar()
+
+                if d < 20:
+                    W.right(90)
+            except KeyboardInterrupt:
+                print("ya paro!")
+                break
+
+    #Retorna una foto
+    def getPhoto(self):
+        self.__cam.start_preview()
+        sleep(3)
+        now = datetime.today()
+        f = self.__content+"capture_"+str(now.year)+"_"+str(now.month)+"_"+str(now.day)+"_"+str(now.hour)+"_"+str(now.minute)+"_"+str(now.second)+".jpeg"
+        try:
+            self.__cam.capture(f)
+        except:
+            print("Error al echar la foto!")
+            return
+        self.__cam.stop_preview()
+
+        return f
+
+    #detecta si la imatge es interesant
+    #def investiga(self,image):
 
 
-W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
+#W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
 
-while True:
-    try:
-        W.forwardClick()
-        d = W.getSonar()
-    
-        if d < 20:
-            W.right(90)
-    except KeyboardInterrupt:
-        print "ya paro!"
-        break
 #W.forward(2)
 #W.right(90)
 #W.forward(1)

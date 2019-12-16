@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/willy.css">
+
+</head>
+<body>
+<div class="back" style="background-image: url('../static/images/bg-01.jpg');">
+    <h2 id="tittle">
+        Willy Control Interface (WCI)
+    </h2>
+
+    <div class="square1">
+        <h2 id="subtitle"> Control Pannel </h3>
+        <div class="control-pannel">
+            <div class="l1">
+                <button class="butt">Forward</button>
+            </div>
+            <br>
+            <div class="l2">
+                <button class="butt">Left</button>
+                <button class="butt" id="stop">Stop</button>
+                <button class="butt">Right</button>
+            </div>
+            <br>
+            <div class="l3">
+                <button class="butt">Backward</button>
+            </div>
+        </div>
+
+        <div class="input-pannel">
+            <form>
+                <label for="fname">Distance: </label>
+                <input type="text" id="distance" name="distanceX" placeholder="X">
+                <input type="text" id="distance" name="distanceY" placeholder="Y">
+                <input type="submit" value="Go!" class="butt-form">
+            </form>
+            <br>
+            <form>
+                    <label for="fname">Rotate: </label>
+                    <input type="text" id="fname" name="rotate" placeholder="Degress">
+                    <input type="submit" value="Go!" class="butt-form">
+                </form>
+        </div>
+    </div>
+    <div class="square2">
+        <h2 id="subtitle"> Camera Pannel </h3>        
+        <div class="log-pannel">
+        </div>
+        <img src="">
+    </div>
+</div>
+</body>
+</html>

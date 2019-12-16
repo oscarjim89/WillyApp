@@ -17,7 +17,7 @@ class Willy(Robot):
         Robot.__init__(self, left, right)
         self.__trig = OutputDevice(sonar[0])
         self.__echo = InputDevice(sonar[1])
-        self.__content = "/home/pi/gitProjects/WillyApp/content/"
+        self.__content = "/content"
         self.__cam = PiCamera()
         print("Hola! Estoy preparado!")
 

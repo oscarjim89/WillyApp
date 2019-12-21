@@ -2,6 +2,7 @@ from time import sleep, time
 from datetime import datetime
 from gpiozero import Robot, InputDevice, OutputDevice
 from picamera import PiCamera
+from Storage import Repository
 
 class Willy(Robot):
 

@@ -3,6 +3,7 @@ from datetime import datetime
 from gpiozero import Robot, InputDevice, OutputDevice
 from picamera import PiCamera
 from Storage import Repository
+from desp2mongo import journalDB
 
 class Willy(Robot):
 

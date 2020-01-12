@@ -20,7 +20,10 @@ class Willy(Robot):
         self.__trig = OutputDevice(sonar[0])
         self.__echo = InputDevice(sonar[1])
         self.__content = "/content"
-        self.__cam = PiCamera()
+        try:
+            self.__cam = PiCamera()
+        except:
+            print ("Warning: Camara no detectada!")    
         print("Hola! Estoy preparado!")
 
     #Mou cap a endavant la distancia en metres especificada
@@ -93,7 +96,7 @@ class Willy(Robot):
         #print(str(round(distance,1)) + "cm")
         return distance
 
-    #Algoritme d'exploració bàsic
+    #Algoritme dexploracio basic
     def Explora(self):
         while True:
             try:

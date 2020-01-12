@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/css/willy.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/wills.css">
 
 </head>
 <body>
@@ -12,20 +12,20 @@
     </h2>
 
     <div class="square1">
-        <h2 id="subtitle"> Control Pannel </h3>
+        <h2 id="subtitle"> Control Pannel </h2>
         <div class="control-pannel">
             <div class="l1">
-                <button class="butt">Forward</button>
+                <button class="butt" id="btn-fw">Forward</button>
             </div>
             <br>
             <div class="l2">
-                <button class="butt">Left</button>
+                <button class="butt" id="btn-lf">Left</button>
                 <button class="butt" id="stop">Stop</button>
-                <button class="butt">Right</button>
+                <button class="butt" id="btn-rg">Right</button>
             </div>
             <br>
             <div class="l3">
-                <button class="butt">Backward</button>
+                <button class="butt" id="btn-bw">Backward</button>
             </div>
         </div>
 
@@ -45,11 +45,65 @@
         </div>
     </div>
     <div class="square2">
-        <h2 id="subtitle"> Camera Pannel </h3>        
-        <div class="log-pannel">
+        <h2 id="subtitle"> Log Pannel </h3>        
+        <div class="log-pannel" id="log-msg">
         </div>
         <img src="">
     </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript">
+        $('button#btn-fw').click(function(){
+          $.ajax({
+              url: "/FW/",
+              type: "POST",
+              success: function(resp){
+                  $('div#log-msg').append(resp.data);
+              }
+          });
+        });
+        $('button#btn-bw').click(function(){
+          $.ajax({
+              url: "/BW/",
+              type: "POST",
+              success: function(resp){
+                  $('div#log-msg').append(resp.data);
+              }
+          });
+        });
+        $('button#btn-lf').click(function(){
+          $.ajax({
+              url: "/left/",
+              type: "POST",
+              success: function(resp){
+                  $('div#log-msg').append(resp.data);
+              }
+          });
+        });
+        $('button#btn-rg').click(function(){
+          $.ajax({
+              url: "/right/",
+              type: "POST",
+              success: function(resp){
+                  $('div#log-msg').append(resp.data);
+              }
+          });
+        });
+        $('button#stop').click(function(){
+          $.ajax({
+              url: "/stop/",
+              type: "POST",
+              success: function(resp){
+                  $('div#log-msg').append(resp.data);
+              }
+          });
+        });
+    </script>
 </div>
 </body>
 </html>

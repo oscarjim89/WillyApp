@@ -25,7 +25,7 @@ class journalDB():
         self.__post_id = self.__posts.insert_one(post).inserted_id
 
     def updateJournal(self,x,y):
-        #añadir entrada en el array de puntos dentro del doc
+        #anadir entrada en el array de puntos dentro del doc
         time_punt=datetime.datetime.now().timestamp()
         myquery = { "_id": self.__post_id }
         newvalues = { "$push": { "punts": { "pos":{ "x": x, "y": y }, "time_punt": time_punt } }}

@@ -61,6 +61,21 @@ def stop():
     response = now.strftime("%H:%M:%S: ")+"Stop!<BR>"
     return jsonify({'data': response})
 
+@app.route('/rotate/degree', methods=['POST'])
+def rotate(degree):
+    W.rotatebyDegrees(degree)
+    response = now.strftime("%H:%M:%S: ")+"Rotate "+degrees+"<BR>"
+    return jsonify({'data': response})
+
+@app.route('/startJ/title', methods=['POST'])
+def startJ(title):
+    response = W.recordJournal(title)
+    if (response == 0):
+        response = now.strftime("%H:%M:%S: ")+"Recording successfully<BR>"
+    else:
+        response = now.strftime("%H:%M:%S: ")+"Recording failed<BR>"
+    return jsonify({'data': response})
+
 ##ejemplo para AJAX
 #@app.route('/_get_data/', methods=['POST'])
 #def _get_data():

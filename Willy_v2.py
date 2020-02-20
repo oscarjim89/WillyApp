@@ -5,12 +5,13 @@ from picamera import PiCamera
 from Storage import Repository
 from desp2mongo import journalDB
 from odometer import odometer
+from math import sqrt, asin
 
 class Willy(Robot):
 
     #Definicio constants
-    MAX_SPEED = 0.45
-    MAX_SEC_DEGREE = 1.15
+    MAX_SPEED = 0.293
+    MAX_SEC_DEGREE = 2.25
 
     #Inicialitza
     def __init__(self, left, right, speed, sonar):
@@ -42,7 +43,18 @@ class Willy(Robot):
         if (self.__record != 0):
             self.__record.updateJournal(distance,0)
         
-    def rotate(self, degrees):
+    def rotatebyTime(self, seconds, direction):
+        if (direction == 'left'):
+            Robot.left(self,self.__speed)
+        else if (direction == 'right'):
+            Robot.right(self,self.__speed)
+        else
+            print("Error: posibles valores: \"left\" o \"right\")
+
+        sleep(seconds)
+        Robot.stop(self)
+
+    def rotatebyDegrees(self, degrees):
         if (degrees <= 180):
             temps = ( degrees * self.__DxS ) / 360
             Robot.right(self,self.__speed)
@@ -183,13 +195,22 @@ class Willy(Robot):
 
         return f
 
-    def grabadesp(self,titol):
+    def recordJournal(self,titol):
         try:
             self.__record = journalDB(titol)
         except:
             print("problemas al crear la BBDD")
-            return
+            return 1
+        return 0
     
+    def goPosition(self,x,y):
+        
+        if((x > 0) and (y > 0)):
+            h=math.sqrt((x * x + y * y))
+            d = math.asin(y / h)
+            self.rotatebyDegrees(d)
+            self.forward(h)
+
     #detecta si la imatge es interesant
     #def investiga(self,image):
 

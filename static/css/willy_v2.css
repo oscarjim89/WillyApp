@@ -133,10 +133,15 @@ label{
 
 /*#right-pannel{
     float: right;
-    background-color: blue;
-    margin-left: auto;
+    margin-left: 680px;
+    margin-top:0px;
     margin-right: auto;
-        width: 200px;
+    width: 300px;
+    line-height: 1.5;
+    height: 400px;
+    max-height: 400px;
+    background-color: #ccc;
+    border-radius: 10px;
 }*/
 
 h3{

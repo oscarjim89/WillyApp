@@ -70,7 +70,7 @@ class Willy(Robot):
     #Mou cap a enrere la distancia en metres especificada
     def backward(self, distance):
         temps = distance / self.__MxS
-        self.rotate(180)
+        self.rotatebyDegrees(180)
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
@@ -80,7 +80,7 @@ class Willy(Robot):
     #Mou a la seva dreta la distancia en metres especificada
     def right(self, distance):
         temps = distance / self.__MxS
-        self.rotate(90)
+        self.rotatebyDegrees(90)
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
@@ -90,7 +90,7 @@ class Willy(Robot):
     #Mou a la seva esquerra la distancia en metres especificada
     def left(self, distance):
         temps = distance / self.__MxS
-        self.rotate(270)
+        self.rotatebyDegrees(270)
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
@@ -119,7 +119,7 @@ class Willy(Robot):
 
     #Endarrere on click
     def backwardClick(self):
-        self.rotate(180)
+        self.rotatebyDegrees(180)
         if (self.__record != 0):
             Robot.forward(self,self.__speed)
             try:
@@ -129,7 +129,7 @@ class Willy(Robot):
 
     #dreta on click
     def rightClick(self):
-        self.rotate(90)
+        self.rotatebyDegrees(90)
         Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
@@ -140,7 +140,7 @@ class Willy(Robot):
 
     #Esquerra on click
     def leftClick(self):
-        self.rotate(270)
+        self.rotatebyDegrees(270)
         Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:

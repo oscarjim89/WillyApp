@@ -48,8 +48,8 @@ class Willy(Robot):
             Robot.left(self,self.__speed)
         elif (direction == 'right'):
             Robot.right(self,self.__speed)
-        else
-            print("Error: posibles valores: \"left\" o \"right\")
+        else:
+            print("Error: posibles valores: \"left\" o \"right\"")
 
         sleep(seconds)
         Robot.stop(self)

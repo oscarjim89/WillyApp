@@ -17,36 +17,64 @@ path = os.path.dirname(os.path.realpath(__file__))
 @app.route('/')
 def index():
     global W
-    W = Willy(left=(17,18), right=(22,23), speed=0.6)
-    return render_template('index.html')
+    try:
+        W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
+    except:
+        print("Error: Error al cargar el objeto Willy")
+    return render_template('Willy.html')
 #    photos = get_photos()
 #    return render_template('index.html', photos=photos)
 
 @app.route('/FW/', methods=['POST'])
 def FW():
     W.forwardClick()
-    return render_template('index.html')
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Moving forward...<BR>"
+    return jsonify({'data': response})
 
 
 @app.route('/BW/', methods=['POST'])
 def BW():
     W.backwardClick()
-    return render_template('index.html')
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Moving backward...<BR>"
+    return jsonify({'data': response})
 
 @app.route('/right/', methods=['POST'])
 def right():
     W.rightClick()
-    return render_template('index.html')
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Moving right...<BR>"
+    return jsonify({'data': response})
 
 @app.route('/left/', methods=['POST'])
 def left():
     W.leftClick()
-    return render_template('index.html')
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Moving left...<BR>"
+    return jsonify({'data': response})
 
 @app.route('/stop/', methods=['POST'])
 def stop():
     W.stopClick()
-    return render_template('index.html')
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Stop!<BR>"
+    return jsonify({'data': response})
+
+@app.route('/rotate/degree', methods=['POST'])
+def rotate(degree):
+    W.rotatebyDegrees(degree)
+    response = now.strftime("%H:%M:%S: ")+"Rotate "+degrees+"<BR>"
+    return jsonify({'data': response})
+
+@app.route('/startJ/title', methods=['POST'])
+def startJ(title):
+    response = W.recordJournal(title)
+    if (response == 0):
+        response = now.strftime("%H:%M:%S: ")+"Recording successfully<BR>"
+    else:
+        response = now.strftime("%H:%M:%S: ")+"Recording failed<BR>"
+    return jsonify({'data': response})
 
 ##ejemplo para AJAX
 #@app.route('/_get_data/', methods=['POST'])
@@ -70,4 +98,4 @@ def stop():
 #    return render_template('view.html', photo=photo, tweeted=True)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=80, host='0.0.0.0')
+    app.run(debug=True, port=5000, host='0.0.0.0')

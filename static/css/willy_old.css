@@ -1,0 +1,122 @@
+/*[ FONT ]*/
+
+@font-face {
+  font-family: Raleway-Black;
+  src: url('../fonts/raleway/Raleway-Black.ttf'); 
+}
+
+@font-face {
+  font-family: Raleway-SemiBold;
+  src: url('../fonts/raleway/Raleway-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: Raleway-Bold;
+  src: url('../fonts/raleway/Raleway-Bold.ttf'); 
+}
+
+body, html {
+    height: 100%;
+	font-family: Raleway-SemiBold, sans-serif;
+}
+
+.back {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .square1 {
+    max-width: 500px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 26px 95px 26px 95px;
+    /*position: left;*/
+    margin: 50px;
+  }
+
+  .square2 {
+    width: 450px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 26px 95px 26px 95px;
+    /*position: left;*/
+    margin: 50px;
+  }
+
+#tittle{
+    color: #ffffff;
+    text-align: center;
+    font-family: Raleway-Bold;
+}
+
+#subtitle{
+    color: #000;
+    text-align: center;
+    font-size: 28px;
+    font-family: Raleway-Bold;
+}
+
+.control-pannel{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    align-content: center;
+}
+.input-pannel{
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+.butt{
+    color: #ffffff;
+    background-color: #2f91ff;
+    width: 150px;
+    height: 50px;
+    font-family: Raleway-Bold;
+    font: bold;
+    font-size: 6mm;
+    border: none;
+}
+.butt-form{
+    color: #ffffff;  
+    background-color: #00c513;   
+    width: 60px;
+    height: 40px;
+    font-family: Raleway-Bold;
+    font: bold;
+    font-size: 4mm;
+    border: none;
+}
+.l1{
+    padding-left: 154px;
+}
+.l3{
+    padding-left: 154px;
+}
+#stop{
+    background-color: #ff5959;
+}
+
+input{
+    cursor: pointer;
+    width: 80px;
+    height: 40px;
+    font-size: 18px;
+}
+
+label{
+    font-family: Raleway-SemiBold;
+    font-size: 18px;
+    color: #555555;
+    line-height: 1.5;
+    width: 5%;
+  }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/css/wills.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/willy_v2.css">
 
 </head>
 <body>
@@ -12,45 +12,43 @@
     </h2>
 
     <div class="square1">
-        <h2 id="subtitle"> Control Pannel </h2>
-        <div class="control-pannel">
-            <div class="l1">
-                <button class="butt" id="btn-fw">Forward</button>
+        <!--h2 id="subtitle"> Control Pannel </h2-->
+        <div id="left-pannel">
+            <div class="control-pannel">
+                <div class="l1">
+                    <button class="butt" id="btn-fw"><img src="../static/images/icons/fw.png" height="50px" width="50px"/></button>
+                </div>
+                <div class="l2">
+                    <button class="butt" id="btn-lf"><img src="../static/images/icons/lf.png" height="50px" width="50px"/></button>
+                    <button class="butt" id="stop"><img src="../static/images/icons/stop.png" height="50px" width="50px"/></button>
+                    <button class="butt" id="btn-rg"><img src="../static/images/icons/rg.png" height="50px" width="50px"/></button>
+                </div>
+                <div class="l3">
+                    <button class="butt" id="btn-bw"><img src="../static/images/icons/bw.png" height="50px" width="50px"/></button>
+                </div>
             </div>
-            <br>
-            <div class="l2">
-                <button class="butt" id="btn-lf">Left</button>
-                <button class="butt" id="stop">Stop</button>
-                <button class="butt" id="btn-rg">Right</button>
-            </div>
-            <br>
-            <div class="l3">
-                <button class="butt" id="btn-bw">Backward</button>
-            </div>
-        </div>
-
-        <div class="input-pannel">
-            <form>
-                <label for="fname">Distance: </label>
-                <input type="text" id="distance" name="distanceX" placeholder="X">
-                <input type="text" id="distance" name="distanceY" placeholder="Y">
-                <input type="submit" value="Go!" class="butt-form">
-            </form>
-            <br>
-            <form>
-                    <label for="fname">Rotate: </label>
-                    <input type="text" id="fname" name="rotate" placeholder="Degress">
-                    <input type="submit" value="Go!" class="butt-form">
+            <div class="input-pannel">
+                <form>
+                    <label for="fname">Distance: </label>
+                    <input type="text" id="distance" name="distanceX" placeholder="X">
+                    <input type="text" id="distance" name="distanceY" placeholder="Y">
+                    <input type="image" alt="Submit" value="Go!" class="butt-form" src="../static/images/icons/go.jpeg" height="50px" width="50px">
                 </form>
-        </div>
-    </div>
-    <div class="square2">
-        <h2 id="subtitle"> Log Pannel </h3>        
+                <br>
+                <form>
+                        <label for="fname">Rotate: </label>
+                        <input type="text" id="fname" name="rotate" placeholder="Degress">
+                        <input type="image" alt="Submit" value="Go!" class="butt-form" src="../static/images/icons/go.jpeg" height="50px" width="50px">
+                    </form>
+            </div>
+        </div>       
         <div class="log-pannel" id="log-msg">
+            <h3>Log pannel</h3>
         </div>
-        <img src="">
+        <div id="right-pannel">
+            <h3></h3>
+        </div>
     </div>
-
     <script
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

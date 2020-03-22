@@ -120,8 +120,8 @@ class Willy(Robot):
     #Endarrere on click
     def backwardClick(self):
         self.rotatebyDegrees(180)
+        Robot.forward(self,self.__speed)
         if (self.__record != 0):
-            Robot.forward(self,self.__speed)
             try:
                 self.__odo.start()
             except: 

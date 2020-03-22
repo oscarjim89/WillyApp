@@ -28,14 +28,14 @@
                 </div>
             </div>
             <div class="input-pannel">
-                <form>
+                <form id="distanceForm">
                     <label for="fname">Distance: </label>
-                    <input type="text" id="distance" name="distanceX" placeholder="X">
-                    <input type="text" id="distance" name="distanceY" placeholder="Y">
+                    <input type="text" class="distance" id="distanceX" name="distanceX" placeholder="X">
+                    <input type="text" class="distance" id="distanceY" name="distanceY" placeholder="Y">
                     <input type="image" alt="Submit" value="Go!" class="butt-form" src="../static/images/icons/go.jpeg" height="50px" width="50px">
                 </form>
                 <br>
-                <form>
+                <form id="rotateForm">
                         <label for="fname">Rotate: </label>
                         <input type="text" id="fname" name="rotate" placeholder="Degress">
                         <input type="image" alt="Submit" value="Go!" class="butt-form" src="../static/images/icons/go.jpeg" height="50px" width="50px">
@@ -100,6 +100,22 @@
                   $('div#log-msg').append(resp.data);
               }
           });
+        });
+        $(document).ready(function() {
+            $('form#distanceForm').on('submit', function(event) {
+            $.ajax({
+                data : {
+                    x : $('#distanceX').val(),
+                    y: $('#distanceY').val(),
+                        },
+                    type : 'POST',
+                    url : '/distance'
+                    })
+                .done(function(data) {
+                $('div#log-msg').text(data.output).show();
+            });
+            event.preventDefault();
+            });
         });
     </script>
 </div>

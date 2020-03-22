@@ -61,11 +61,20 @@ def stop():
     response = now.strftime("%H:%M:%S: ")+"Stop!<BR>"
     return jsonify({'data': response})
 
-@app.route('/rotate/degree', methods=['POST'])
-def rotate(degree):
-    W.rotatebyDegrees(degree)
-    response = now.strftime("%H:%M:%S: ")+"Rotate "+degrees+"<BR>"
+@app.route('/distance', methods=['POST'])
+def distance():
+    x = request.form['x']
+    y = request.form['y']
+    W.goPosition(x,y)
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+"<BR>"
     return jsonify({'data': response})
+
+#@app.route('/rotate/degree', methods=['POST'])
+#def rotate(degree):
+#    W.rotatebyDegrees(degree)
+#    response = now.strftime("%H:%M:%S: ")+"Rotate "+degrees+"<BR>"
+#    return jsonify({'data': response})
 
 @app.route('/startJ/title', methods=['POST'])
 def startJ(title):

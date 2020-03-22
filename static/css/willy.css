@@ -93,12 +93,13 @@ body, html {
     padding-left: 65px;
 }
 
-#distance{
+.distance{
     cursor: pointer;
     width: 40px;
     height: 30px;
     font-size: 12px;
 }
+
 #fname{
     cursor: pointer;
     width: 85px;

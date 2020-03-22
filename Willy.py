@@ -46,7 +46,7 @@ class Willy(Robot):
     def rotatebyTime(self, seconds, direction):
         if (direction == 'left'):
             Robot.left(self,self.__speed)
-        else if (direction == 'right'):
+        elif (direction == 'right'):
             Robot.right(self,self.__speed)
         else
             print("Error: posibles valores: \"left\" o \"right\")

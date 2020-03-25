@@ -211,9 +211,6 @@ class Willy(Robot):
             h = sqrt((x * x + y * y))
             d = degrees(atan(y / x))
 
-            print(h)
-            print(d)
-
             self.rotatebyDegrees(d)
             self.forward(round(h))
 

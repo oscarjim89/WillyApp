@@ -205,7 +205,9 @@ class Willy(Robot):
     
     def goPosition(self,x,y):
         
-        if((x > 0) and (y > 0)):
+        print(x)
+        print(y)
+        if((int(x) > 0) and (int(y) > 0)):
             h=math.sqrt((x * x + y * y))
             d = math.asin(y / h)
             self.rotatebyDegrees(d)

@@ -5,7 +5,7 @@ from picamera import PiCamera
 from Storage import Repository
 from desp2mongo import journalDB
 from odometer import odometer
-from math import sqrt, atan, degrees, round
+from math import sqrt, atan, degrees
 
 class Willy(Robot):
 

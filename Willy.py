@@ -5,7 +5,7 @@ from picamera import PiCamera
 from Storage import Repository
 from desp2mongo import journalDB
 from odometer import odometer
-from math import sqrt, atan, degrees
+from math import sqrt, atan, degrees, round
 
 class Willy(Robot):
 
@@ -215,7 +215,7 @@ class Willy(Robot):
             print(d)
 
             self.rotatebyDegrees(d)
-            self.forward(h)
+            self.forward(round(h))
 
     #detecta si la imatge es interesant
     #def investiga(self,image):

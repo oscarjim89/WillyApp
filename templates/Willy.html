@@ -112,7 +112,7 @@
                     url : '/distance'
                     })
                 .done(function(resp) {
-                $('div#log-msg').text(resp.data).show();
+                $('div#log-msg').append(resp.data);
             });
             event.preventDefault();
             });

@@ -207,7 +207,7 @@ class Willy(Robot):
         x = int(x)
         y = int(y)
  
-        if(x > 0) and (y > 0)):
+        if(x > 0) and (y > 0):
             h = sqrt((x * x + y * y))
             d = asin(y / h)
             self.rotatebyDegrees(d)

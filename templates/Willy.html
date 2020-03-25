@@ -111,7 +111,7 @@
                     type : 'POST',
                     url : '/distance'
                     })
-                .done(function(data) {
+                .done(function(resp) {
                 $('div#log-msg').text(resp.data).show();
             });
             event.preventDefault();

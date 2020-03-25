@@ -208,8 +208,8 @@ class Willy(Robot):
         print(x)
         print(y)
         if((int(x) > 0) and (int(y) > 0)):
-            h=math.sqrt((x * x + y * y))
-            d = math.asin(y / h)
+            h = sqrt((x * x + y * y))
+            d = asin(y / h)
             self.rotatebyDegrees(d)
             self.forward(h)
 

@@ -67,7 +67,7 @@ def distance():
     y = request.form['y']
     W.goPosition(x,y)
     now = datetime.now()
-    response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+"</BR>"
+    response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+" <br>"
     return jsonify({'data': response})
 
 #@app.route('/rotate/degree', methods=['POST'])

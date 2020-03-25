@@ -5,7 +5,7 @@ from picamera import PiCamera
 from Storage import Repository
 from desp2mongo import journalDB
 from odometer import odometer
-from math import sqrt, asin
+from math import sqrt, atan
 
 class Willy(Robot):
 
@@ -209,7 +209,7 @@ class Willy(Robot):
  
         if(x > 0) and (y > 0):
             h = sqrt((x * x + y * y))
-            d = asin(y / h)
+            d = atan(y / x)
 
             print(h)
             print(d)

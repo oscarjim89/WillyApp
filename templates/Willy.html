@@ -116,6 +116,19 @@
             });
             event.preventDefault();
             });
+            $('form#rotateForm').on('submit', function(event) {
+            $.ajax({
+                data : {
+                    deg : $('#fname').val(),
+                        },
+                    type : 'POST',
+                    url : '/rotate'
+                    })
+                .done(function(resp) {
+                $('div#log-msg').append(resp.data);
+            });
+            event.preventDefault();
+            });
         });
     </script>
 </div>

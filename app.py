@@ -70,15 +70,18 @@ def distance():
     response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+" <br>"
     return jsonify({'data': response})
 
-#@app.route('/rotate/degree', methods=['POST'])
-#def rotate(degree):
-#    W.rotatebyDegrees(degree)
-#    response = now.strftime("%H:%M:%S: ")+"Rotate "+degrees+"<BR>"
-#    return jsonify({'data': response})
+@app.route('/rotate', methods=['POST'])
+def rotate():
+    deg = request.form['deg']
+    W.rotatebyDegrees(deg)
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Rotate "+deg+"<BR>"
+    return jsonify({'data': response})
 
 @app.route('/startJ/title', methods=['POST'])
 def startJ(title):
     response = W.recordJournal(title)
+    now = datetime.now()
     if (response == 0):
         response = now.strftime("%H:%M:%S: ")+"Recording successfully<BR>"
     else:

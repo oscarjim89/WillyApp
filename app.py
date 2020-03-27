@@ -73,7 +73,7 @@ def distance():
 @app.route('/rotate', methods=['POST'])
 def rotate():
     deg = request.form['deg']
-    W.rotatebyDegrees(deg)
+    W.rotatebyDegrees(int(deg))
     now = datetime.now()
     response = now.strftime("%H:%M:%S: ")+"Rotate "+deg+"<BR>"
     return jsonify({'data': response})

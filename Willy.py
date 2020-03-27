@@ -220,6 +220,7 @@ class Willy(Robot):
         else:
             h = sqrt((abs(x) * abs(x)) + (abs(y) * abs(y)))
             d = degrees(atan(abs(y) / abs(x))
+
             if (x > 0) and (y > 0):
                 self.rotatebyDegrees(d)
             elif (x < 0) and (y > 0):

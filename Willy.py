@@ -204,15 +204,32 @@ class Willy(Robot):
         return 0
     
     def goPosition(self,x,y):
-        x = int(x)
-        y = int(y)
+        x = float(x)
+        y = float(y)
  
-        if(x > 0) and (y > 0):
-            h = sqrt((x * x + y * y))
-            d = degrees(atan(y / x))
+        if (y == 0):
+            if (x > 0):
+                self.right(x)
+            elif (x < 0):
+                self.left(abs(x)) 
+        elif (x == 0):
+            if (y > 0):
+                self.forward(y)
+            elif (y < 0):
+                self.backward(abs(y))
+        else:
+            h = sqrt((abs(x) * abs(x)) + (abs(y) * abs(y)))
+            d = degrees(atan(abs(y) / abs(x))
+            if (x > 0) and (y > 0):
+                self.rotatebyDegrees(d)
+            elif (x < 0) and (y > 0):
+                self.rotatebyDegrees(360-d)
+            elif (x > 0) and (y < 0):
+                self.rotatebyDegrees(90+d)
+            elif (x < 0) and (y < 0):
+                self.rotatebyDegrees(270-d)
+            self.forward(round(h,1))
 
-            self.rotatebyDegrees(d)
-            self.forward(round(h))
 
     #detecta si la imatge es interesant
     #def investiga(self,image):

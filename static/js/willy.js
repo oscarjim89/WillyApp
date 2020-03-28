@@ -3,7 +3,7 @@ $('button#btn-fw').click(function(){
         url: "/FW/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -12,7 +12,7 @@ $('button#btn-fw').click(function(){
         url: "/BW/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -21,7 +21,7 @@ $('button#btn-fw').click(function(){
         url: "/left/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -30,7 +30,7 @@ $('button#btn-fw').click(function(){
         url: "/right/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -39,7 +39,7 @@ $('button#btn-fw').click(function(){
         url: "/stop/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -48,7 +48,7 @@ $('button#btn-fw').click(function(){
         url: "/rotateleft/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -57,7 +57,7 @@ $('button#btn-fw').click(function(){
         url: "/rotateright/",
         type: "POST",
         success: function(resp){
-            $('div#log-msg').append(resp.data);
+            $('p#log-msg').append(resp.data);
         }
     });
   });
@@ -72,7 +72,7 @@ $('button#btn-fw').click(function(){
               url : '/distance'
               })
           .done(function(resp) {
-          $('div#log-msg').append(resp.data);
+          $('p#log-msg').append(resp.data);
       });
       event.preventDefault();
       });
@@ -85,7 +85,7 @@ $('button#btn-fw').click(function(){
               url : '/rotate'
               })
           .done(function(resp) {
-          $('div#log-msg').append(resp.data);
+          $('p#log-msg').append(resp.data);
       });
       event.preventDefault();
       });

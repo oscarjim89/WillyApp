@@ -37,6 +37,14 @@ body, html {
     margin: 50px;
   }
 
+  /* Clear floats after the columns */
+.square1:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
   /*.square2 {
     width: 450px;
     background: #fff;
@@ -118,43 +126,37 @@ label{
     width: 5%;
   }
 
-#left-pannel{
-    float: left;
-}
-
 #log-msg{
-    margin-left: 280px;
-    margin-right: auto;
-    width: 40%;
-    line-height: 1.5;
-    height: 400px;
-    max-height: 400px;
-    background-color: #ccc;
-    border-radius: 10px;
     overflow: scroll;
     font-family: Consolas;
 }
 
-/*#log-msg-area{
-    margin-top: 50px;
-    margin-left: 5%;
-    margin-right:
-    width: 90%;
-    height: 330px;
-}*/
+.column {
+    float: left;
+    padding: 10px;
+  }
 
-/*#right-pannel{
-    float: right;
-    margin-left: 680px;
-    margin-top:0px;
-    margin-right: auto;
-    width: 300px;
+.left {
+    width: 20%
+}
+.middle, .right {
+    width: 35%;
+    margin-left: 20px;
+    margin-right: 20px;
     line-height: 1.5;
     height: 400px;
-    max-height: 400px;
     background-color: #ccc;
     border-radius: 10px;
-}*/
+}
+
+#right-pannel{
+    margin-top:0px;
+    margin-right: auto;
+    line-height: 1.5;
+    height: 400px;
+    background-color: #b5e2ea;
+    border-radius: 10px;
+}
 
 h3{
     text-align: center;

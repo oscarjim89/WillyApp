@@ -132,6 +132,7 @@ label{
     background-color: #ccc;
     border-radius: 10px;
     overflow: scroll;
+    font-family: Consolas;
 }
 
 /*#log-msg-area{

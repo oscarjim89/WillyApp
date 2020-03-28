@@ -75,7 +75,21 @@ def rotate():
     deg = request.form['deg']
     W.rotatebyDegrees(int(deg))
     now = datetime.now()
-    response = now.strftime("%H:%M:%S: ")+"Rotate "+deg+"<BR>"
+    response = now.strftime("%H:%M:%S: ")+"Rotate "+deg+"º<BR>"
+    return jsonify({'data': response})
+
+@app.route('/rotateleft', methods=['POST'])
+def rotate():
+    W.rotatebyTime(left)
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Rotating left..."<BR>"
+    return jsonify({'data': response})
+
+@app.route('/rotateright', methods=['POST'])
+def rotate():
+    W.rotatebyTime(right)
+    now = datetime.now()
+    response = now.strftime("%H:%M:%S: ")+"Rotating right..."<BR>"
     return jsonify({'data': response})
 
 @app.route('/startJ/title', methods=['POST'])

@@ -43,16 +43,16 @@ class Willy(Robot):
         if (self.__record != 0):
             self.__record.updateJournal(distance,0)
         
-    def rotatebyTime(self, seconds, direction):
+    def rotatebyTime(self, direction, seconds):
         if (direction == 'left'):
             Robot.left(self,self.__speed)
         elif (direction == 'right'):
             Robot.right(self,self.__speed)
         else:
             print("Error: posibles valores: \"left\" o \"right\"")
-
-        sleep(seconds)
-        Robot.stop(self)
+        if seconds :
+            sleep(seconds)
+            Robot.stop(self)
 
     def rotatebyDegrees(self, degrees):
         if (degrees <= 180):
@@ -175,7 +175,7 @@ class Willy(Robot):
                 d = self.getSonar()
 
                 if d < 20:
-                    W.right(90)
+                    self.right(90)
             except KeyboardInterrupt:
                 print("ya paro!")
                 break

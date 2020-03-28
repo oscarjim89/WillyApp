@@ -24,9 +24,9 @@
                     <button class="butt" id="btn-rg"><img src="../static/images/icons/arrow_right.png" height="50px" width="50px"/></button>
                 </div>
                 <div class="l3">
-                    <button class="butt" id="btn-rt-lf"><img src="../static/images/icons/rt-lf.png" height="50px" width="50px"/></button>
+                    <button class="butt" id="btn-rt-lf"><img src="../static/images/icons/rt-rg.png" height="50px" width="50px"/></button>
                     <button class="butt" id="btn-bw"><img src="../static/images/icons/arrow_down.png" height="50px" width="50px"/></button>
-                    <button class="butt" id="btn-rt-rg"><img src="../static/images/icons/rt-rg.png" height="50px" width="50px"/></button>
+                    <button class="butt" id="btn-rt-rg"><img src="../static/images/icons/rt-lf.png" height="50px" width="50px"/></button>
                 </div>
             </div>
             <div class="input-pannel">
@@ -56,83 +56,8 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous">
     </script>
+    <script src="../static/js/willy.js"></script>
 
-    <script type="text/javascript">
-        $('button#btn-fw').click(function(){
-          $.ajax({
-              url: "/FW/",
-              type: "POST",
-              success: function(resp){
-                  $('div#log-msg').append(resp.data);
-              }
-          });
-        });
-        $('button#btn-bw').click(function(){
-          $.ajax({
-              url: "/BW/",
-              type: "POST",
-              success: function(resp){
-                  $('div#log-msg').append(resp.data);
-              }
-          });
-        });
-        $('button#btn-lf').click(function(){
-          $.ajax({
-              url: "/left/",
-              type: "POST",
-              success: function(resp){
-                  $('div#log-msg').append(resp.data);
-              }
-          });
-        });
-        $('button#btn-rg').click(function(){
-          $.ajax({
-              url: "/right/",
-              type: "POST",
-              success: function(resp){
-                  $('div#log-msg').append(resp.data);
-              }
-          });
-        });
-        $('button#stop').click(function(){
-          $.ajax({
-              url: "/stop/",
-              type: "POST",
-              success: function(resp){
-                  $('div#log-msg').append(resp.data);
-              }
-          });
-        });
-        $(document).ready(function() {
-            $('form#distanceForm').on('submit', function(event) {
-            $.ajax({
-                data : {
-                    x : $('#distanceX').val(),
-                    y: $('#distanceY').val(),
-                        },
-                    type : 'POST',
-                    url : '/distance'
-                    })
-                .done(function(resp) {
-                $('div#log-msg').append(resp.data);
-            });
-            event.preventDefault();
-            });
-            $('form#rotateForm').on('submit', function(event) {
-            $.ajax({
-                data : {
-                    deg : $('#fname').val(),
-                        },
-                    type : 'POST',
-                    url : '/rotate'
-                    })
-                .done(function(resp) {
-                $('div#log-msg').append(resp.data);
-            });
-            event.preventDefault();
-            });
-        });
-    </script>
 </div>
 </body>
 </html>

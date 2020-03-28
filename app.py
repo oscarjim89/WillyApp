@@ -79,14 +79,14 @@ def rotate():
     return jsonify({'data': response})
 
 @app.route('/rotateleft', methods=['POST'])
-def rotate():
+def rotateleft():
     W.rotatebyTime(left)
     now = datetime.now()
     response = now.strftime("%H:%M:%S: ")+"Rotating left...<BR>"
     return jsonify({'data': response})
 
 @app.route('/rotateright', methods=['POST'])
-def rotate():
+def rotateright():
     W.rotatebyTime(right)
     now = datetime.now()
     response = now.strftime("%H:%M:%S: ")+"Rotating right...<BR>"

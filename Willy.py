@@ -219,7 +219,7 @@ class Willy(Robot):
                 self.backward(abs(y))
         else:
             h = sqrt((abs(x) * abs(x)) + (abs(y) * abs(y)))
-            d = degrees(atan(abs(y) / abs(x))
+            d = degrees(atan(abs(y) / abs(x)))
 
             if (x > 0) and (y > 0):
                 self.rotatebyDegrees(d)

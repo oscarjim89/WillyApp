@@ -131,13 +131,16 @@ label{
     max-height: 400px;
     background-color: #ccc;
     border-radius: 10px;
+    overflow: scroll;
 }
 
-#log-msg-area{
+/*#log-msg-area{
     margin-top: 50px;
-    width: 100%;
+    margin-left: 5%;
+    margin-right:
+    width: 90%;
     height: 330px;
-}
+}*/
 
 /*#right-pannel{
     float: right;

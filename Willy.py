@@ -195,6 +195,7 @@ class Willy(Robot):
 
         return f
 
+    #Inicia la grabación dun nou desplacament
     def recordJournal(self,titol):
         try:
             self.__record = journalDB(titol)
@@ -203,6 +204,7 @@ class Willy(Robot):
             return 1
         return 0
     
+    #Es desplaca segons coordinades x,y
     def goPosition(self,x,y):
         x = float(x)
         y = float(y)
@@ -231,9 +233,6 @@ class Willy(Robot):
                 self.rotatebyDegrees(270-d)
             self.forward(round(h,1))
 
-
-    #detecta si la imatge es interesant
-    #def investiga(self,image):
 
 
 #W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))

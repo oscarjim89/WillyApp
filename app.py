@@ -92,12 +92,13 @@ def rotateright():
     response = now.strftime("%H:%M:%S: ")+"Rotating right...<BR>"
     return jsonify({'data': response})
 
-@app.route('/startJ/title', methods=['POST'])
-def startJ(title):
+@app.route('/startJ/', methods=['POST'])
+def startJ():
+    title = request.form['title']
     response = W.recordJournal(title)
     now = datetime.now()
     if (response == 0):
-        response = now.strftime("%H:%M:%S: ")+"Recording successfully<BR>"
+        response = now.strftime("%H:%M:%S: ")+title+", Recording stated!<BR>"
     else:
         response = now.strftime("%H:%M:%S: ")+"Recording failed<BR>"
     return jsonify({'data': response})

@@ -61,6 +61,18 @@ $('button#btn-fw').click(function(){
         }
     });
   });
+  $('button#btn-rec').click(function(){
+    $.ajax({
+        data : {
+            title : prompt("Nom del desplaçament"),
+                },
+        url: "/startJ/",
+        type: "POST",
+        success: function(resp){
+            $('div#log-msg').append(resp.data);
+        }
+    });
+  });
   $(document).ready(function() {
       $('form#distanceForm').on('submit', function(event) {
       $.ajax({
@@ -88,5 +100,5 @@ $('button#btn-fw').click(function(){
           $('div#log-msg').append(resp.data);
       });
       event.preventDefault();
-      });
+      });   
   });

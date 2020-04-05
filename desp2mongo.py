@@ -5,7 +5,7 @@ class journalDB():
 
     def __init__(self,titol):
         #Crear documento de desplazamiento
-        client = MongoClient("mongodb+srv://Willydbuser:Abr4c4d4br401@willymongo-vkgl5.mongodb.net/test?retryWrites=true&w=majority")
+        client = MongoClient("mongodb+srv://Willydbuser:Abracadabra1@willymongo-vkgl5.mongodb.net/test?retryWrites=true&w=majority")
 
         db = client.WillyDB
         self.__posts = db.Journals

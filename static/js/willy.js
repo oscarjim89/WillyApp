@@ -73,6 +73,15 @@ $('button#btn-fw').click(function(){
         }
     });
   });
+  $('button#btn-rec-stp').click(function(){
+    $.ajax({
+        url: "/stopJ/",
+        type: "POST",
+        success: function(resp){
+            $('svg#map').append(resp.svgdata);
+        }
+    });
+  });
   $(document).ready(function() {
       $('form#distanceForm').on('submit', function(event) {
       $.ajax({
@@ -85,6 +94,7 @@ $('button#btn-fw').click(function(){
               })
           .done(function(resp) {
           $('div#log-msg').append(resp.data);
+          $('svg#map').append(resp.svgdata);
       });
       event.preventDefault();
       });

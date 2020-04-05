@@ -68,7 +68,11 @@ def distance():
     W.goPosition(x,y)
     now = datetime.now()
     response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+" <br>"
-    return jsonify({'data': response})
+    if(W.isRecording() != 0):
+        svgresponse = "<line x1=\"0\" y1=\"0\" x2=\""+x+"\" y2=\""+y+"\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />" 
+    else:
+        svgresponse = "<h3>Not recording...</h3>"
+    return jsonify({'data': response, 'svgdata': svgresponse})
 
 @app.route('/rotate', methods=['POST'])
 def rotate():

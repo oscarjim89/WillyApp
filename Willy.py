@@ -22,7 +22,7 @@ class Willy(Robot):
         self.__trig = OutputDevice(sonar[0])
         self.__echo = InputDevice(sonar[1])
         self.__content = "/content"
-        self.__record = 0 #Indica si hay un desplazamiento abierto
+        self.__record = 0 #Indica si hay un desplazamiento activo
         self.__currMov = 0 #Movimiento en curso
         try:
             self.__odo = odometer()
@@ -39,9 +39,7 @@ class Willy(Robot):
         temps = distance / self.__MxS
         Robot.forward(self,self.__speed)
         sleep(temps)
-        Robot.stop(self)        
-        if (self.__record != 0):
-            self.__record.updateJournal(distance,0)
+        Robot.stop(self)
         
     def rotatebyTime(self, direction, seconds):
         if (direction == 'left'):
@@ -74,8 +72,6 @@ class Willy(Robot):
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
-        if (self.__record != 0):
-            self.__record.updateJournal(-distance,0)
 
     #Mou a la seva dreta la distancia en metres especificada
     def right(self, distance):
@@ -84,8 +80,6 @@ class Willy(Robot):
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
-        if (self.__record != 0):
-            self.__record.updateJournal(0,distance)
 
     #Mou a la seva esquerra la distancia en metres especificada
     def left(self, distance):
@@ -94,8 +88,6 @@ class Willy(Robot):
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
-        if (self.__record != 0):
-            self.__record.updateJournal(0,-distance)
 
     #Stop on click
     def stopClick(self):
@@ -114,7 +106,6 @@ class Willy(Robot):
         if (self.__record != 0):
             try:
                 self.__odo.start()
-                self.__record.updateJournal()
             except: 
                 print("Warning: Odometer (Mouse) no detectado!")
 
@@ -237,6 +228,11 @@ class Willy(Robot):
                 self.rotatebyDegrees(270-d)
             self.forward(round(h,1))
 
+        if (self.__record != 0):
+            self.__record.updateJournal(x,y)
+
+    def isRecording(self):
+        return self.__record
 
 
 #W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))

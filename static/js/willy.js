@@ -64,7 +64,7 @@ $('button#btn-fw').click(function(){
   $('button#btn-rec').click(function(){
     $.ajax({
         data : {
-            title : prompt("Nom del desplaçament"),
+            title : prompt("Journal Name: "),
                 },
         url: "/startJ/",
         type: "POST",

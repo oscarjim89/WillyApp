@@ -99,8 +99,10 @@ def startJ():
     now = datetime.now()
     if (response == 0):
         response = now.strftime("%H:%M:%S: ")+title+", Recording stated!<BR>"
-    else:
+    elif (response == 1):
         response = now.strftime("%H:%M:%S: ")+"Recording failed<BR>"
+    else:
+        response = now.strftime("%H:%M:%S: ")+"Journal exist! Try again!<BR>"
     return jsonify({'data': response})
 
 ##ejemplo para AJAX

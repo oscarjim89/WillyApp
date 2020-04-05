@@ -114,6 +114,7 @@ class Willy(Robot):
         if (self.__record != 0):
             try:
                 self.__odo.start()
+                self.__record.updateJournal()
             except: 
                 print("Warning: Odometer (Mouse) no detectado!")
 
@@ -202,6 +203,8 @@ class Willy(Robot):
         except:
             print("problemas al crear la BBDD")
             return 1
+        if (self.__record == None):
+            return 2
         return 0
     
     #Es desplaca segons coordinades x,y

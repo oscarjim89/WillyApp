@@ -200,10 +200,11 @@ class Willy(Robot):
     def recordJournal(self,titol):
         try:
             self.__record = journalDB(titol)
+            res = self.__record.getJournalid()
         except:
             print("problemas al crear la BBDD")
             return 1
-        if (self.__record == None):
+        if (res == None):
             return 2
         return 0
     

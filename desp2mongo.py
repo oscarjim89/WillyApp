@@ -29,6 +29,9 @@ class journalDB():
             }
             self.__post_id = self.__posts.insert_one(post).inserted_id
 
+    def getJournalid(self):
+        return self.__post_id
+
     def updateJournal(self,x,y):
         #anadir entrada en el array de puntos dentro del doc
         time_punt=datetime.datetime.now().timestamp()

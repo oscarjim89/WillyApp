@@ -1,4 +1,5 @@
 import struct, os
+from time import sleep
 
 class odometer():
     def __init__(self):
@@ -10,11 +11,19 @@ class odometer():
 
     def start(self):
         buf = self.__file.read(3)
-        self.__x_ini,self.__y_ini = struct.unpack( "dd", buf[1:] )
+        self.__x_ini,self.__y_ini = struct.unpack( "bb", buf[1:] )
 
     def stop(self):
         buf = self.__file.read(3)
-        self.__x_fi,self.__y_fi = struct.unpack("dd", buf[1:] )
+        self.__x_fi,self.__y_fi = struct.unpack("bb", buf[1:] )
         x = self.__x_fi - self.__x_ini
         y = self.__y_fi - self.__y_ini
         return x, y
+
+    def track(self):
+        while 1:
+            buf = self.__file.read(3)
+            x, y = struct.unpack( "bb", buf[1:] )
+            print (x, y)
+            sleep(1)
+

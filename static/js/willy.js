@@ -94,7 +94,7 @@ $('button#btn-fw').click(function(){
               })
           .done(function(resp) {
           $('div#log-msg').append(resp.data);
-          $('svg#map').append(resp.svgdata);
+          $('div#map').append(resp.svgdata);
       });
       event.preventDefault();
       });

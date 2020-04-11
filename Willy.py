@@ -39,13 +39,14 @@ class Willy(Robot):
 
         print("Hi! I am ready!")
 
-    #Mou cap a endavant la distancia en metres especificada
+    #Moves forward the input distance (input in meters)
     def forward(self, distance):
         temps = distance / self.__MxS
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
         
+    #Rotate by time in the specified direction
     def rotatebyTime(self, direction, seconds):
         if (direction == 'left'):
             Robot.left(self,self.__speed)

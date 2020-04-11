@@ -24,7 +24,8 @@ class odometer():
         self.__x = 0
         self.__y = 0
         self.__terminate = True
-        sleep(5)
+        sleep(2)
+        self.__terminate = False
         self.__t = threading.Thread(target=self.activate, daemon=True)
         self.__t.start()
 

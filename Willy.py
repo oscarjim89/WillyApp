@@ -107,11 +107,9 @@ class Willy(Robot):
     #Endavant on click
     def forwardClick(self):
         if (self.__record != 0):
-            try:
-                x,y=self.__odo.getOdo()
-                self.__record.updateJournal(x,y)
-            except:
-                print("Warning: Problems updating odometer position..")
+            x,y=self.__odo.getOdo()
+            print(x,y)
+            self.__record.updateJournal(x,y)            
         Robot.forward(self,self.__speed)
 
     #Endarrere on click

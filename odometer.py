@@ -9,9 +9,8 @@ class odometer():
         self.__y = 0
         self.__buf
         self.__t = threading.Thread(target=self.activate, daemon=True)
-        self.__t.start()
 
-        
+        self.__t.start()
 
     def activate(self):
         while 1:
@@ -24,6 +23,6 @@ class odometer():
         self.__x = 0
         self.__y = 0
         self.__t.start()
-        
+
     def getOdo(self):
         return self.__x, self.__y

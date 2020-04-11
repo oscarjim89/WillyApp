@@ -26,10 +26,11 @@ class Willy(Robot):
         self.__record = 0 #Indicates if the moves have to be recorded
 
         #Try to run the mouse odometer
-        try:
-            self.__odo = odometer()
-        except:
-            print ("Warning: Odometer (Mouse) not detected!")
+        self.__odo = odometer()
+        #try:
+        #    self.__odo = odometer()
+        #except:
+        #    print ("Warning: Odometer (Mouse) not detected!")
         
         #Try to run de Pi Camera
         try:

@@ -73,7 +73,7 @@ def distance():
     else:
         svgresponse = "<h3>Not recording...</h3>"
     print(svgresponse)
-    return jsonify({'data': response, 'svgdata': svgresponse})
+    return jsonify({'svgdata': svgresponse})
 
 @app.route('/rotate', methods=['POST'])
 def rotate():

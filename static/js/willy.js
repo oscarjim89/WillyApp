@@ -93,7 +93,7 @@ $('button#btn-fw').click(function(){
               url : '/distance'
               })
           .done(function(resp) {
-          $('div#log-msg').append(resp.data);
+          /*$('div#log-msg').append(resp.data);*/
           $('div#map').append(resp.svgdata);
       });
       event.preventDefault();

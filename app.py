@@ -72,6 +72,7 @@ def distance():
         svgresponse = "<svg height=\"500\" width=\"500\"><line x1=\"0\" y1=\"0\" x2=\""+x*10+"\" y2=\""+y*10+"\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /></svg>" 
     else:
         svgresponse = "<h3>Not recording...</h3>"
+    print(svgresponse)
     return jsonify({'data': response, 'svgdata': svgresponse})
 
 @app.route('/rotate', methods=['POST'])

@@ -1,29 +1,29 @@
 import struct, os
+import threading
 from time import sleep
 
 class odometer():
     def __init__(self):
         self.__file = open("/dev/input/mice", "rb")
-        self.__x_ini = 0
-        self.__y_ini = 0
-        self.__x_fi = 0
-        self.__y_fi = 0
+        self.__x = 0
+        self.__y = 0
+        self.__buf
+        self.__t = threading.Thread(target=self.activate, daemon=True)
+        self.__t.start()
 
-    def start(self):
-        buf = self.__file.read(3)
-        self.__x_ini,self.__y_ini = struct.unpack( "bb", buf[1:] )
+        
 
-    def stop(self):
-        buf = self.__file.read(3)
-        self.__x_fi,self.__y_fi = struct.unpack("bb", buf[1:] )
-        x = self.__x_fi - self.__x_ini
-        y = self.__y_fi - self.__y_ini
-        return x, y
-
-    def track(self):
+    def activate(self):
         while 1:
-            buf = self.__file.read(3)
-            x, y = struct.unpack( "bb", buf[1:] )
-            print (x, y)
-            sleep(1)
-
+            self.__buf = self.__file.read(3)
+            dis_x,dis_y = struct.unpack( "bb", self.__buf[1:] )
+            self.__x = self.__x + dis_x
+            self.__y = self.__y + dis_y
+    
+    def reset(self):
+        self.__x = 0
+        self.__y = 0
+        self.__t.start()
+        
+    def getOdo(self):
+        return self.__x, self.__y

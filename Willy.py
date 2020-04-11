@@ -9,30 +9,35 @@ from math import sqrt, atan, degrees
 
 class Willy(Robot):
 
-    #Definicio constants
-    MAX_SPEED = 0.293
-    MAX_SEC_DEGREE = 2.25
+    #Constants definition
+    MAX_SPEED = 0.293 #Calibration parameter: Distance in 1 meter
+    MAX_SEC_DEGREE = 2.25 #Calibration parameter: Seconds in 360 degrees
 
-    #Inicialitza
+    #Init Willy object
+    #Example: Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
     def __init__(self, left, right, speed, sonar):
-        self.__speed = speed
-        self.__MxS = speed * self.MAX_SPEED
-        self.__DxS = self.MAX_SEC_DEGREE / speed
-        Robot.__init__(self, left, right)
-        self.__trig = OutputDevice(sonar[0])
-        self.__echo = InputDevice(sonar[1])
-        self.__content = "/content"
-        self.__record = 0 #Indica si hay un desplazamiento activo
-        self.__currMov = 0 #Movimiento en curso
+        self.__speed = speed #Global speed intensity (float [0..1]).
+        self.__MxS = speed * self.MAX_SPEED #Normalize constants with intensity
+        self.__DxS = self.MAX_SEC_DEGREE / speed #Normalize constants with intensity
+        Robot.__init__(self, left, right) #Robot object declaration
+        self.__trig = OutputDevice(sonar[0]) #Set sonar output Pin
+        self.__echo = InputDevice(sonar[1]) #Set sonar input Pin
+        self.__content = "/content" #Local folder to save content
+        self.__record = 0 #Indicates if the moves have to be recorded
+
+        #Try to run the mouse odometer
         try:
             self.__odo = odometer()
         except:
-            print ("Warning: Odometer (Mouse) no detectado!")
+            print ("Warning: Odometer (Mouse) not detected!")
+        
+        #Try to run de Pi Camera
         try:
             self.__cam = PiCamera()
         except:
-            print ("Warning: Camara no detectada!")    
-        print("Hola! Estoy preparado!")
+            print ("Warning: Camera not detected!")    
+
+        print("Hi! I am ready!")
 
     #Mou cap a endavant la distancia en metres especificada
     def forward(self, distance):
@@ -94,52 +99,53 @@ class Willy(Robot):
         Robot.stop(self)
         if (self.__record != 0):
             try:
-                x,y=self.__odo.stop()
+                x,y=self.__odo.getOdo()
                 self.__record.updateJournal(x,y)
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
-
+            except:
+                print("Warning: Problems updating odometer position..")
 
     #Endavant on click
     def forwardClick(self):
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        Robot.forward(self,self.__speed)
 
     #Endarrere on click
     def backwardClick(self):
-        self.rotatebyDegrees(180)
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        self.rotatebyDegrees(180)
+        Robot.forward(self,self.__speed)
 
     #dreta on click
     def rightClick(self):
-        self.rotatebyDegrees(90)
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
-
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        self.rotatebyDegrees(90)
+        Robot.forward(self,self.__speed)
 
     #Esquerra on click
     def leftClick(self):
-        self.rotatebyDegrees(270)
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
-
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        self.rotatebyDegrees(270)
+        Robot.forward(self,self.__speed)
 
     #Printa per pantalla la distancia en cm
     def getSonar(self):

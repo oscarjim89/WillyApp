@@ -8,12 +8,13 @@ class odometer():
         self.__x = 0
         self.__y = 0
         self.__buf = 0
+        self.__terminate = False
         self.__t = threading.Thread(target=self.activate, daemon=True)
 
         self.__t.start()
 
     def activate(self):
-        while 1:
+        while not self.__terminate:
             self.__buf = self.__file.read(3)
             dis_x,dis_y = struct.unpack( "bb", self.__buf[1:] )
             self.__x = self.__x + dis_x
@@ -22,6 +23,8 @@ class odometer():
     def reset(self):
         self.__x = 0
         self.__y = 0
+        self.__terminate = True
+        sleep(1)
         self.__t.start()
 
     def getOdo(self):

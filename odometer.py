@@ -7,7 +7,7 @@ class odometer():
         self.__file = open("/dev/input/mice", "rb")
         self.__x = 0
         self.__y = 0
-        self.__buf
+        self.__buf = 0
         self.__t = threading.Thread(target=self.activate, daemon=True)
 
         self.__t.start()

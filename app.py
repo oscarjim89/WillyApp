@@ -69,7 +69,7 @@ def distance():
     now = datetime.now()
     response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+" <br>"
     if(W.isRecording() != 0):
-        svgresponse = "<svg height=\"500\" width=\"500\"><line x1=\"0\" y1=\"0\" x2=\""+x*10+"\" y2=\""+y*10+"\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /></svg>" 
+        svgresponse = "<svg height=\"500\" width=\"500\"><line x1=\"0\" y1=\"0\" x2=\""+int(x)*10+"\" y2=\""+int(y)*10+"\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /></svg>" 
     else:
         svgresponse = "<h3>Not recording...</h3>"
     print(svgresponse)

@@ -24,6 +24,7 @@ class Willy(Robot):
         self.__echo = InputDevice(sonar[1]) #Set sonar input Pin
         self.__content = "/content" #Local folder to save content
         self.__record = 0 #Indicates if the moves have to be recorded
+        self.__currmov = 0 #indicates that are a movement in active.
 
         #Try to run the mouse odometer
         try:
@@ -238,6 +239,17 @@ class Willy(Robot):
 
     def isRecording(self):
         return self.__record
+
+    #Corrige el desplazamiento de la X/Y para que siempre sea el especificado en fix.
+    #La función será ejecutada por un thread en paralelo que se iniciará cuando se ejecute un desplazamiento de tipo XXXClick()
+    #Se puede utilizar la variable global self.__currmov que después se pueda parar el thread.
+    #Entrada:
+    #  fix: valor en cm que se ha de mantener fijo
+    #  axis: eje a fijar. posibles valores: [x,y]
+    #Salida:
+    #  No retorna nada.
+    def correctPosition(self,axis,fix):
+
 
 
 #W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))

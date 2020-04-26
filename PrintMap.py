@@ -24,7 +24,7 @@ class PrintMap():
             x2 = x1 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
             y2 = y1 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
 
-            image = image + "<line x1=\""+x1+"%\" y1=\""+y1+"%\" x2=\""+x2+"%\" y2=\""+y2+"%\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />"
+            image = image + "<line x1=\""+str(x1)+"%\" y1=\""+str(y1)+"%\" x2=\""+str(x2)+"%\" y2=\""+str(y2)+"%\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />"
 
         image = image + "</svg></div>"
 

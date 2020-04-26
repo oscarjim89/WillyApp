@@ -8,7 +8,7 @@ class PrintMap():
         db = client.WillyDB
         self.__posts = db.Journals
         self.__journal = self.__posts.find_one({"_id": id})
-        self.__count = print(len(self.__journal["punts"]))
+        self.__count = len(self.__journal["punts"])
         self.__res = res
 
     def printSVG(self):
@@ -17,7 +17,7 @@ class PrintMap():
         y1 = 50
         image = "<div style=\"height: 500px;width: 500px;\"><svg height=\"100%\" width=\"100%\">"
 
-        for i in range(self.__res):
+        for i in range(self.__count):
             x1 = x1 + (self.__journal["punts"][i]["pos"]["x"]*self.__res)
             y1 = y1 - (self.__journal["punts"][i]["pos"]["y"]*self.__res)
 

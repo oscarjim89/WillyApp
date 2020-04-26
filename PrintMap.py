@@ -28,6 +28,11 @@ class PrintMap():
 
         image = image + "</svg></div>"
 
+        dirFichero = './templates/prova.html'
+        fichero = open(dirFichero, 'w')
+        fichero.write(image)
+        fichero.close()
+
         return image
 
     #def updateSVG(self):

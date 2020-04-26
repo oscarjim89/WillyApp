@@ -249,6 +249,32 @@ class Willy(Robot):
     #Salida:
     #  No retorna nada.
     def correctPosition(self,axis,fix):
+        float dif, error2fix
+        difAnt=0
+        kp=0.1
+        kd=0-1
+        while (self.__currmov):
+
+
+            
+            dif=float(self.__odo.getOdo)-fix
+            error2fix= kp*dif + kd*(difAnt-dif)
+            difAnt=dif
+
+            if(axis='Y'):
+                #long map(long x, long in_min, long in_max, long out_min, long out_max)
+                #{return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;}
+                self.__speed= error2fix*(1-0)/(dif-0)+0
+                if(elf.__odo.getOdo<fix):
+                    self.forward
+                else if (self.__odo.getOdo>fix): #Això pot fer que el robot entri en bucle d'anar endavant i endarrera eternament pq sempre es pasi de 0...
+                    self.backward
+            else:
+                if(self.__odo.getOdo<fix):
+                    self.right
+                else if (self.__odo.getOdo>fix): #Això pot fer que el robot entri en bucle d'anar endavant i endarrera eternament pq sempre es pasi de 0...
+                    self.left            
+
 
 
 

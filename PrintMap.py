@@ -22,12 +22,15 @@ class PrintMap():
             y1 = y1 - (self.__journal["punts"][i]["pos"]["y"]*self.__res)
 
             try:
-                x1 = x1 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
-                y1 = y1 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
+                x2 = x1 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
+                y2 = y1 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
             except IndexError:
                 break
 
             image = image + "<line x1=\""+str(x1)+"%\" y1=\""+str(y1)+"%\" x2=\""+str(x2)+"%\" y2=\""+str(y2)+"%\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />"
+
+            x1,y1 = x2,y2
+            
 
         image = image + "</svg></div></html>"
 

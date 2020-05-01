@@ -2,7 +2,7 @@ from pymongo import *
 
 class PrintMap():
 
-    def __init__(self,id,res=10):
+    def __init__(self,id,res=2):
 
         client = MongoClient("mongodb+srv://Willydbuser:Abracadabra1@willymongo-vkgl5.mongodb.net/test?retryWrites=true&w=majority")
         db = client.WillyDB
@@ -15,6 +15,8 @@ class PrintMap():
 
         x1 = 50
         y1 = 50
+        x2 = 50
+        y2 = 50
         image = "<!DOCTYPE html><html><div style=\"height: 500px;width: 500px;\"><svg height=\"100%\" width=\"100%\">"
 
         for i in range(self.__count):
@@ -22,8 +24,8 @@ class PrintMap():
             y1 = y1 - (self.__journal["punts"][i]["pos"]["y"]*self.__res)
 
             try:
-                x2 = x1 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
-                y2 = y1 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
+                x2 = x2 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
+                y2 = y2 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
             except IndexError:
                 break
 

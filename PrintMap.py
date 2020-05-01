@@ -29,10 +29,7 @@ class PrintMap():
             except IndexError:
                 break
 
-            image = image + "<line x1=\""+str(x1)+"%\" y1=\""+str(y1)+"%\" x2=\""+str(x2)+"%\" y2=\""+str(y2)+"%\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />"
-
-            x1,y1 = x2,y2
-            
+            image = image + "<line x1=\""+str(x1)+"%\" y1=\""+str(y1)+"%\" x2=\""+str(x2)+"%\" y2=\""+str(y2)+"%\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />"            
 
         image = image + "</svg></div></html>"
 

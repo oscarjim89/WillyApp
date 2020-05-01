@@ -22,8 +22,8 @@ class PrintMap():
             y1 = y1 - (self.__journal["punts"][i]["pos"]["y"]*self.__res)
 
             try:
-                x2 = x1 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
-                y2 = y1 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
+                x1 = x1 + (self.__journal["punts"][i+1]["pos"]["x"]*self.__res)
+                y1 = y1 - (self.__journal["punts"][i+1]["pos"]["y"]*self.__res)
             except IndexError:
                 break
 

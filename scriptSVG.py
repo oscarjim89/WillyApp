@@ -5,7 +5,6 @@ from time import sleep
 
 j1 = journalDB("prova_020520201800")
 o1 = odometer()
-o1.activate()
 p1 = PrintMap(j1.getJournalid())
 
 while True:

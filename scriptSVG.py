@@ -8,8 +8,11 @@ o1 = odometer()
 o1.activate()
 p1 = PrintMap(j1.getJournalid())
 
-while not KeyboardInterrupt:
-    j1.updateJournal(o1.getOdo())
-    sleep(2)
+while True:
+    try:
+        j1.updateJournal(o1.getOdo())
+        sleep(2)
+    except KeyboardInterrupt:
+        break
 
 p1.printSVG()

@@ -1,10 +1,15 @@
-from pymongo import *
+from desp2mongo import *
+from odometer import *
 from PrintMap import *
+from time import sleep
 
-client = MongoClient("mongodb+srv://Willydbuser:Abracadabra1@willymongo-vkgl5.mongodb.net/test?retryWrites=true&w=majority")
+j1 = journalDB("prova_020520201800")
+o1 = odometer()
+o1.activate()
+p1 = PrintMap(j1.getJournalid())
 
-db = client.WillyDB
-posts = db.Journals
-journal = posts.find_one({"titol": "prueba_print_01"})
-a = PrintMap(journal["_id"])
-a.printSVG()
+while not KeyboardInterrupt:
+    j1.updateJournal(o1.getOdo())
+    sleep(2)
+
+p1.printSVG()

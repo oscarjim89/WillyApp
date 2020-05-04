@@ -5,9 +5,8 @@ from time import sleep
 from datetime import datetime
 
 now = datetime.now()
-j1 = journalDB("prova_%H%M%S")
+j1 = journalDB("prova"+now.strftime("%H%M%S"))
 o1 = odometer()
-p1 = PrintMap(j1.getJournalid())
 
 while True:
     try:
@@ -16,5 +15,7 @@ while True:
         sleep(1)
     except KeyboardInterrupt:
         break
+
+p1 = PrintMap(j1.getJournalid())
 
 p1.printSVG()

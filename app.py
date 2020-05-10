@@ -68,7 +68,12 @@ def distance():
     W.goPosition(x,y)
     now = datetime.now()
     response = now.strftime("%H:%M:%S: ")+"Go position: x: "+x+", y:"+y+" <br>"
-    return jsonify({'data': response})
+    if(W.isRecording() != 0):
+        svgresponse = "<svg height=\"500\" width=\"500\"><line x1=\"0\" y1=\"0\" x2=\""+int(x)*10+"\" y2=\""+int(y)*10+"\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /></svg>" 
+    else:
+        svgresponse = "<h3>Not recording...</h3>"
+    print(svgresponse)
+    return jsonify({'svgdata': svgresponse})
 
 @app.route('/rotate', methods=['POST'])
 def rotate():
@@ -92,14 +97,17 @@ def rotateright():
     response = now.strftime("%H:%M:%S: ")+"Rotating right...<BR>"
     return jsonify({'data': response})
 
-@app.route('/startJ/title', methods=['POST'])
-def startJ(title):
+@app.route('/startJ/', methods=['POST'])
+def startJ():
+    title = request.form['title']
     response = W.recordJournal(title)
     now = datetime.now()
     if (response == 0):
-        response = now.strftime("%H:%M:%S: ")+"Recording successfully<BR>"
-    else:
+        response = now.strftime("%H:%M:%S: ")+title+", Recording stated!<BR>"
+    elif (response == 1):
         response = now.strftime("%H:%M:%S: ")+"Recording failed<BR>"
+    else:
+        response = now.strftime("%H:%M:%S: ")+"Journal exist! Try again!<BR>"
     return jsonify({'data': response})
 
 ##ejemplo para AJAX

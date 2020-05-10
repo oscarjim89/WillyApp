@@ -9,40 +9,45 @@ from math import sqrt, atan, degrees
 
 class Willy(Robot):
 
-    #Definicio constants
-    MAX_SPEED = 0.293
-    MAX_SEC_DEGREE = 2.25
+    #Constants definition
+    MAX_SPEED = 0.293 #Calibration parameter: Distance in 1 meter
+    MAX_SEC_DEGREE = 2.25 #Calibration parameter: Seconds in 360 degrees
 
-    #Inicialitza
+    #Init Willy object
+    #Example: Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
     def __init__(self, left, right, speed, sonar):
-        self.__speed = speed
-        self.__MxS = speed * self.MAX_SPEED
-        self.__DxS = self.MAX_SEC_DEGREE / speed
-        Robot.__init__(self, left, right)
-        self.__trig = OutputDevice(sonar[0])
-        self.__echo = InputDevice(sonar[1])
-        self.__content = "/content"
-        self.__record = 0 #Indica si hay un desplazamiento abierto
-        self.__currMov = 0 #Movimiento en curso
+        self.__speed = speed #Global speed intensity (float [0..1]).
+        self.__MxS = speed * self.MAX_SPEED #Normalize constants with intensity
+        self.__DxS = self.MAX_SEC_DEGREE / speed #Normalize constants with intensity
+        Robot.__init__(self, left, right) #Robot object declaration
+        self.__trig = OutputDevice(sonar[0]) #Set sonar output Pin
+        self.__echo = InputDevice(sonar[1]) #Set sonar input Pin
+        self.__content = "/content" #Local folder to save content
+        self.__record = 0 #Indicates if the moves have to be recorded
+        self.__currmov = 0 #indicates that are a movement in active.
+
+        #Try to run the mouse odometer
         try:
             self.__odo = odometer()
         except:
-            print ("Warning: Odometer (Mouse) no detectado!")
+            print ("Warning: Odometer (Mouse) not detected!")
+        
+        #Try to run de Pi Camera
         try:
             self.__cam = PiCamera()
         except:
-            print ("Warning: Camara no detectada!")    
-        print("Hola! Estoy preparado!")
+            print ("Warning: Camera not detected!")    
 
-    #Mou cap a endavant la distancia en metres especificada
+        print("Hi! I am ready!")
+
+    #Moves forward the input distance (input in meters)
     def forward(self, distance):
         temps = distance / self.__MxS
         Robot.forward(self,self.__speed)
         sleep(temps)
-        Robot.stop(self)        
-        if (self.__record != 0):
-            self.__record.updateJournal(distance,0)
+        Robot.stop(self)
         
+    #Rotate by time in the specified direction
     def rotatebyTime(self, direction, seconds):
         if (direction == 'left'):
             Robot.left(self,self.__speed)
@@ -74,8 +79,6 @@ class Willy(Robot):
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
-        if (self.__record != 0):
-            self.__record.updateJournal(-distance,0)
 
     #Mou a la seva dreta la distancia en metres especificada
     def right(self, distance):
@@ -84,8 +87,6 @@ class Willy(Robot):
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
-        if (self.__record != 0):
-            self.__record.updateJournal(0,distance)
 
     #Mou a la seva esquerra la distancia en metres especificada
     def left(self, distance):
@@ -94,60 +95,57 @@ class Willy(Robot):
         Robot.forward(self,self.__speed)
         sleep(temps)
         Robot.stop(self)
-        if (self.__record != 0):
-            self.__record.updateJournal(0,-distance)
 
     #Stop on click
     def stopClick(self):
         Robot.stop(self)
         if (self.__record != 0):
             try:
-                x,y=self.__odo.stop()
+                x,y=self.__odo.getOdo()
                 self.__record.updateJournal(x,y)
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
-
+            except:
+                print("Warning: Problems updating odometer position..")
 
     #Endavant on click
     def forwardClick(self):
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
-            try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
+            x,y=self.__odo.getOdo()
+            print(x,y)
+            self.__record.updateJournal(x,y)            
+        Robot.forward(self,self.__speed)
 
     #Endarrere on click
     def backwardClick(self):
-        self.rotatebyDegrees(180)
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        self.rotatebyDegrees(180)
+        Robot.forward(self,self.__speed)
 
     #dreta on click
     def rightClick(self):
-        self.rotatebyDegrees(90)
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
-
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        self.rotatebyDegrees(90)
+        Robot.forward(self,self.__speed)
 
     #Esquerra on click
     def leftClick(self):
-        self.rotatebyDegrees(270)
-        Robot.forward(self,self.__speed)
         if (self.__record != 0):
             try:
-                self.__odo.start()
-            except: 
-                print("Warning: Odometer (Mouse) no detectado!")
-
+                x,y=self.__odo.getOdo()
+                self.__record.updateJournal(x,y)
+            except:
+                print("Warning: Problems updating odometer position..")
+        self.rotatebyDegrees(270)
+        Robot.forward(self,self.__speed)
 
     #Printa per pantalla la distancia en cm
     def getSonar(self):
@@ -195,14 +193,19 @@ class Willy(Robot):
 
         return f
 
+    #Inicia la grabación dun nou desplacament
     def recordJournal(self,titol):
         try:
             self.__record = journalDB(titol)
+            res = self.__record.getJournalid()
         except:
             print("problemas al crear la BBDD")
             return 1
+        if (res == None):
+            return 2
         return 0
     
+    #Es desplaca segons coordinades x,y
     def goPosition(self,x,y):
         x = float(x)
         y = float(y)
@@ -231,9 +234,48 @@ class Willy(Robot):
                 self.rotatebyDegrees(270-d)
             self.forward(round(h,1))
 
+        if (self.__record != 0):
+            self.__record.updateJournal(x,y)
 
-    #detecta si la imatge es interesant
-    #def investiga(self,image):
+    def isRecording(self):
+        return self.__record
+
+    #Corrige el desplazamiento de la X/Y para que siempre sea el especificado en fix.
+    #La función será ejecutada por un thread en paralelo que se iniciará cuando se ejecute un desplazamiento de tipo XXXClick()
+    #Se puede utilizar la variable global self.__currmov que después se pueda parar el thread.
+    #Entrada:
+    #  fix: valor en cm que se ha de mantener fijo
+    #  axis: eje a fijar. posibles valores: [x,y]
+    #Salida:
+    #  No retorna nada.
+    def correctPosition(self,axis,fix):
+        float dif, error2fix
+        difAnt=0
+        kp=0.1
+        kd=0-1
+        while (self.__currmov):
+
+
+            
+            dif=float(self.__odo.getOdo)-fix
+            error2fix= kp*dif + kd*(difAnt-dif)
+            difAnt=dif
+
+            if(axis='Y'):
+                #long map(long x, long in_min, long in_max, long out_min, long out_max)
+                #{return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;}
+                self.__speed= error2fix*(1-0)/(dif-0)+0
+                if(elf.__odo.getOdo<fix):
+                    self.forward
+                else if (self.__odo.getOdo>fix): #Això pot fer que el robot entri en bucle d'anar endavant i endarrera eternament pq sempre es pasi de 0...
+                    self.backward
+            else:
+                if(self.__odo.getOdo<fix):
+                    self.right
+                else if (self.__odo.getOdo>fix): #Això pot fer que el robot entri en bucle d'anar endavant i endarrera eternament pq sempre es pasi de 0...
+                    self.left            
+
+
 
 
 #W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))

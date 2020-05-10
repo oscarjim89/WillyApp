@@ -61,6 +61,27 @@ $('button#btn-fw').click(function(){
         }
     });
   });
+  $('button#btn-rec').click(function(){
+    $.ajax({
+        data : {
+            title : prompt("Journal Name: "),
+                },
+        url: "/startJ/",
+        type: "POST",
+        success: function(resp){
+            $('div#log-msg').append(resp.data);
+        }
+    });
+  });
+  $('button#btn-rec-stp').click(function(){
+    $.ajax({
+        url: "/stopJ/",
+        type: "POST",
+        success: function(resp){
+            $('svg#map').append(resp.svgdata);
+        }
+    });
+  });
   $(document).ready(function() {
       $('form#distanceForm').on('submit', function(event) {
       $.ajax({
@@ -72,7 +93,8 @@ $('button#btn-fw').click(function(){
               url : '/distance'
               })
           .done(function(resp) {
-          $('div#log-msg').append(resp.data);
+          /*$('div#log-msg').append(resp.data);*/
+          $('div#map').append(resp.svgdata);
       });
       event.preventDefault();
       });
@@ -88,5 +110,5 @@ $('button#btn-fw').click(function(){
           $('div#log-msg').append(resp.data);
       });
       event.preventDefault();
-      });
+      });   
   });

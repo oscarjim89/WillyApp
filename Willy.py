@@ -248,7 +248,7 @@ class Willy(Robot):
     #  axis: eje a fijar. posibles valores: [x,y]
     #Salida:
     #  No retorna nada.
-    def correctPosition(self,axis,fix):
+'''    def correctPosition(self,axis,fix):
         float dif, error2fix
         difAnt=0
         kp=0.1
@@ -273,7 +273,7 @@ class Willy(Robot):
                 if(self.__odo.getOdo<fix):
                     self.right
                 else if (self.__odo.getOdo>fix): #Això pot fer que el robot entri en bucle d'anar endavant i endarrera eternament pq sempre es pasi de 0...
-                    self.left            
+                    self.left '''
 
 
 

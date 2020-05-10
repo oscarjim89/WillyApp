@@ -10,6 +10,7 @@ class PrintMap():
         self.__journal = self.__posts.find_one({"_id": id})
         self.__count = len(self.__journal["punts"])
         self.__res = res
+        self.__id = id
 
     def printSVG(self):
 
@@ -35,6 +36,8 @@ class PrintMap():
 
         image = image + "</svg></div></html>"
 
+        self.__posts.update_one({"_id": self.__id},{"$set": {"svg": image}})
+        
         dirFichero = './templates/prova.html'
         fichero = open(dirFichero, 'w')
         fichero.write(image)

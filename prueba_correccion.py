@@ -21,4 +21,5 @@ while (1):
     #TODO: Asegurar-se de que el rang del errorPID sigui abs(0.5)
     if(errorPID>abs(0.15)):
         print (errorPID, vel_base-errorPID,vel_base+errorPID)
+    sleep(5)
                 

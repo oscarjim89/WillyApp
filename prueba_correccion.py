@@ -20,7 +20,8 @@ while (1):
         i=0
     errorPID= (kp*p + ki*i + kd*d)/10 #-0.16
     #TODO: Asegurar-se de que el rang del errorPID sigui abs(0.5)
-    if(errorPID>abs(0.15)):
-        print (errorPID, vel_base-errorPID,vel_base+errorPID)
-    sleep(5)
+    #if(errorPID>abs(0.15)):
+    print (errorPID, vel_base-errorPID,vel_base+errorPID)
+    
+    sleep(3)
                 

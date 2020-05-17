@@ -1,4 +1,5 @@
 from odometer import odometer
+from time import sleep
 
 vel_base = 0.5
 p=0

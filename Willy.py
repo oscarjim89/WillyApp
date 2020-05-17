@@ -241,7 +241,7 @@ class Willy(Robot):
 
     def isRecording(self):
         return self.__record
-'''
+
     #Corrige el desplazamiento de la X/Y para que siempre sea el especificado en fix.
     #La función será ejecutada por un thread en paralelo que se iniciará cuando se ejecute un desplazamiento de tipo XXXClick()
     #Se puede utilizar la variable global self.__currmov que después se pueda parar el thread.
@@ -250,33 +250,49 @@ class Willy(Robot):
     #  axis: eje a fijar. posibles valores: [x,y]
     #Salida:
     #  No retorna nada.
-    def correctPosition(self,axis,fix):
+
+    #AHORA SOLO APLICA FORWARD SIMPLE:
+    def forward_v2(self):
+        float kp, p, p_ant, ki, i, kd, d, errorPID
+        float vel_base = 0.5
+        p,p_ant,i,d=0
+        kp=0.1
+        ki=0.1
+        kd=0.1
+
+        self.__currmov=1
+        Robot.forward(self.__speedL,self.__speedR)
+
+        while (self.__currmov):
+            xo,yo=self.__odo.getOdo()
+            p=0-xo #-3.5
+            i=i+p #-9.5
+            d=p-p_ant #-7.5
+            p_ant=p #-3.5
+            if ((p*i)<0):
+                 i=0
+            errorPID= (kp*p + ki*i + kd*d)/10 #-0.16
+            #TODO: Asegurar-se de que el rang del errorPID sigui abs(0.5)
+            if(errorPID>abs(0.15)):
+                Robot.forward(vel_base-errorPID,vel_base+errorPID)
+
+    '''
+    #p_amb_el_sinus:
+    xo,yo=self.__odo.getOdo()
+    #TODO:treure xf i yf del GoTo.
+    sin=(yo-yf)/sqrt((xf-xo)^2+(yf-yo)^2)'''
+
+    def forward_v2(self):
         float kp, p, p_ant, ki, i, kd, d, errorPID
         float vel_base = 0.5
         p,p_ant,i,d=0
         kp=0
         ki=0
         kd=0
-        while (self.__currmov):
-            x,y=self.__odo.getOdo()
-            if(axis='Y'):
-                p=x-fix
-            else if (axis='X'):
-                p=y-fix
-            i=i+p
-            d=p-p_ant
-            p_ant=p
-            if ((p*i)<0):
-                 i=0
-            errorPID= kp*p + ki*i + kd*d
-            #TODO: Asegurar-se de que el rang del errorPID sigui abs(0.5)
-            #Robot.forward(self,self.__speedL,self.__speedR)
-            Robot.forward(self,vel_base-errorPID,vel_base+errorPID)
-    #p_amb_el_sinus:
-    xo,yo=self.__odo.getOdo()
-    #TODO:treure xf i yf del GoTo.
-    sin=(yo-yf)/sqrt((xf-xo)^2+(yf-yo)^2)
-'''        
+        self.__currmov=1
+        Robot.forward(self.__speedL,self.__speedR)
+
+      
 
 
 

@@ -18,7 +18,7 @@ path = os.path.dirname(os.path.realpath(__file__))
 def index():
     global W
     try:
-        W = Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
+        W = Willy(left=(17,18), right=(22,23), speed_left=0.5, speed_right=0.5, sonar=(4,15))
     except:
         print("Error: Error al cargar el objeto Willy")
     return render_template('Willy.html')

@@ -253,12 +253,14 @@ class Willy(Robot):
 
     #AHORA SOLO APLICA FORWARD SIMPLE:
     def forward_v2(self):
-        float kp, p, p_ant, ki, i, kd, d, errorPID
-        float vel_base = 0.5
-        p,p_ant,i,d=0
-        kp=0.1
-        ki=0.1
-        kd=0.1
+        vel_base = 0.5
+        p=0
+        p_ant=0
+        i=0
+        d=0
+        kp=10
+        ki=0.5
+        kd=1
 
         self.__currmov=1
         Robot.forward(self.__speedL,self.__speedR)
@@ -274,7 +276,7 @@ class Willy(Robot):
             errorPID= (kp*p + ki*i + kd*d)/10 #-0.16
             #TODO: Asegurar-se de que el rang del errorPID sigui abs(0.5)
             if(errorPID>abs(0.15)):
-                Robot.forward(vel_base-errorPID,vel_base+errorPID)
+                Robot.forward(vel_base+errorPID,vel_base-errorPID)
 
     '''
     #p_amb_el_sinus:

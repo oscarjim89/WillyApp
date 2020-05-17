@@ -22,7 +22,7 @@ while (1):
 
     if (errorPID>0.5):
         errorPID=0.5
-    else if (errorPID<-0.5):
+    elif (errorPID<-0.5):
         errorPID=-0.5
 
     #if(errorPID>abs(0.15)):

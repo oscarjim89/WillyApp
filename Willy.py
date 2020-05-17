@@ -274,6 +274,11 @@ class Willy(Robot):
             if ((p*i)<0):
                  i=0
             errorPID= (kp*p + ki*i + kd*d)/10 #-0.16
+            if (errorPID>0.5):
+                errorPID=0.5
+            elif (errorPID<-0.5):
+                errorPID=-0.5
+
             #TODO: Asegurar-se de que el rang del errorPID sigui abs(0.5)
             if(errorPID>abs(0.15)):
                 Robot.forward(vel_base+errorPID,vel_base-errorPID)

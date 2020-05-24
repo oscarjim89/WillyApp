@@ -5,7 +5,9 @@ from picamera import PiCamera
 from Storage import Repository
 from desp2mongo import journalDB
 from odometer import odometer
+from followometer import followometer
 from math import sqrt, atan, degrees
+
 
 class Willy(Robot):
 
@@ -13,6 +15,7 @@ class Willy(Robot):
     MAX_SPEED = 0.293 #Calibration parameter: Distance in 1 meter
     MAX_SEC_DEGREE = 2.25 #Calibration parameter: Seconds in 360 degrees
     ROT_SPEED = 0.5 #Velocitat de rotació pel gir calibrat: robot.right/.left (motiu: modificació speedL i speedR)
+    vel_base = 0.5
 
     #Init Willy object
     #Example: Willy(left=(17,18), right=(22,23), speed=0.5, sonar=(4,15))
@@ -33,6 +36,12 @@ class Willy(Robot):
             self.__odo = odometer()
         except:
             print ("Warning: Odometer (Mouse) not detected!")
+
+        #Try to run the mouse followometer
+        try:
+            self.__follow = followometer()
+        except:
+            print ("Warning: Followometer (Mouse) not detected!")
         
         #Try to run de Pi Camera
         try:
@@ -253,7 +262,6 @@ class Willy(Robot):
 
     #AHORA SOLO APLICA FORWARD SIMPLE:
     def forward_v2(self):
-        vel_base = 0.5
         p=0
         p_ant=0
         i=0
@@ -283,23 +291,54 @@ class Willy(Robot):
             if(errorPID>abs(0.15)):
                 Robot.forward(vel_base+errorPID,vel_base-errorPID)
 
+    
     '''
     #p_amb_el_sinus:
     xo,yo=self.__odo.getOdo()
     #TODO:treure xf i yf del GoTo.
     sin=(yo-yf)/sqrt((xf-xo)^2+(yf-yo)^2)'''
-
-    def forward_v2(self):
-        float kp, p, p_ant, ki, i, kd, d, errorPID
-        float vel_base = 0.5
-        p,p_ant,i,d=0
-        kp=0
-        ki=0
-        kd=0
+    '''
+    def followDmouse(self):
+        xLead, yLead= self.__follow.getLeader()
+        xAct, yAct= self.__odo.getOdo()
         self.__currmov=1
         Robot.forward(self.__speedL,self.__speedR)
 
-      
+        #if se ha asignado destino:
+            #hayDestino=True
+
+        #if hayDestino:
+        while not yLead=yAct:
+            #if para
+            #elif arranca
+            #if nuevoDestino
+            #elif reset
+            if yLead>yAct:
+                Robot.forward(vel_base,vel_base)
+            else:
+                Robot.forward(-vel_base,-vel_base)
+        
+        while not xLead=xAct:
+            #if para
+            #elif arranca
+            #if nuevoDestino
+            #elif reset
+            if xLead>xAct:
+                self.rotatebyDegrees(90)
+                Robot.forward(vel_base,vel_base)
+            else:
+                self.rotatebyDegrees(270)
+                Robot.forward(vel_base,vel_base)
+        #hayDestino=False
+        
+        #en followometer.py modificar codigo para detectar click botones y scroll.
+        #si se pulsan los dos botones, no contar x e y's.
+        #doble click izquierdo asignar posicion xLead,yLead.
+        #doble click derecho reset coordenadas.
+        #single click izquierdo, arranca.
+        #single click derecho, para.
+        #scroll varia la velocidad. 
+    '''
 
 
 

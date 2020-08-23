@@ -3,6 +3,7 @@ FROM arm32v7/alpine
 RUN apk add --no-cache python3-dev \
     && apk add --no-cache py3-pip \
     && pip install --upgrade pip
+    
 WORKDIR /opt/WillyApp
 
 COPY . /opt/WillyApp
